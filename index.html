@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <style type="text/css">
+        .aClass td {
+            position: relative;
+            width: 150px;
+            height: 50px;
+            border: 1px solid black;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .bClass td {
+            position: relative;
+            width: 100px;
+            height: 40px;
+            border: 0.8px solid green;
+            text-align: center;
+        }
+    </style>
+    <script>
+        //修改时间
+        function a(time) {
+            time.parentNode.getElementsByTagName("time")[0].innerHTML = time.value;
+        }
+
+        function b(btn) {
+            if (btn.parentNode.getElementsByTagName("input")[1].style.display == "none") {
+                btn.value = "保存";
+                btn.parentNode.getElementsByTagName("input")[1].style.display = "block";
+            } else if (btn.parentNode.getElementsByTagName("input")[1].style.display == "block") {
+                btn.value = "修改";
+                btn.parentNode.getElementsByTagName("input")[1].style.display = "none";
+            }
+        }
+
+        //添加员工
+        function addS() {
+            //console.log(document.getElementById("single"));
+            if (document.getElementById("single").style.display == "none") {
+                document.getElementById("single").style.display = "block";
+            }
+            //  else if (document.getElementById("single").style.display == "block") {
+            //     document.getElementById("single").style.display = "none";
+            // }
+        }
+
+        //添加该员工空余时间
+        function addT() {
+            let table = document.getElementById("TT");
+            table.insertRow(table.rows.length).insertCell(0).innerHTML = "<input type='text'>";
+        }
+
+        function confirm() {            
+            for (let i = 0; i < document.getElementById("TT").rows.length+1; i++) {
+                let row = document.getElementById("staff").insertRow(document.getElementById("staff").rows.length);
+                row.insertCell(0);
+                if(i==0){                    
+                    row.insertCell(1);
+                }
+                
+            }
+            document.getElementById("staff").rows[document.getElementById("staff").rows.length-document.getElementById("TT").rows.length-1].cells[0].innerHTML = document.getElementById("name").value;
+            document.getElementById("staff").rows[document.getElementById("staff").rows.length-document.getElementById("TT").rows.length-1].cells[0].setAttribute("rowspan", document.getElementById("staff").rows.length);           
+            document.getElementById("TT").innerHTML = "";
+            document.getElementById("single").style.display = "none";
+        }
+
+        function cancel() {
+            document.getElementById("TT").innerHTML = "";
+            document.getElementById("single").style.display = "none";
+        }
+    </script>
+</head>
+
+<body>
+    <table class="aClass">
+        <thead>
+            <td style="text-align: center">班次</td>
+            <td style="text-align: center">时间</td>
+            <td style="text-align: center">星期一</td>
+            <td style="text-align: center">星期二</td>
+            <td style="text-align: center">星期三</td>
+            <td style="text-align: center">星期四</td>
+            <td style="text-align: center">星期五</td>
+            <td style="text-align: center">星期六</td>
+            <td style="text-align: center">星期天</td>
+            </head>
+            <tr>
+                <td rowspan="2" style="text-align: center">早班</td>
+                <td>
+                    <time>07:30 </time>&nbsp;&nbsp;
+                    <input type="button" value="修改" onclick="b(this)" />
+                    <input type="time" onchange="a(this);" style="display: none" value="07:30" />
+                </td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+            </tr>
+            <tr>
+                <td>
+                    <time>13:30 </time>&nbsp;&nbsp;
+                    <input type="button" value="修改" onclick="b(this)" />
+                    <input type="time" onchange="a(this);" style="display: none" value="13:30" />
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: center">晚班</td>
+                <td>
+                    <time>14:30 </time>&nbsp;&nbsp;
+                    <input type="button" value="修改" onclick="b(this)" />
+                    <input type="time" onchange="a(this);" style="display: none" value="07:30" />
+                </td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+            </tr>
+            <tr>
+                <td>
+                    <time>19:30 </time>&nbsp;&nbsp;
+                    <input type="button" value="修改" onclick="b(this)" />
+                    <input type="time" onchange="a(this);" style="display: none" value="13:30" />
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="2" style="text-align: center">夜班</td>
+                <td>
+                    <time>20:30 </time>&nbsp;&nbsp;
+                    <input type="button" value="修改" onclick="b(this)" />
+                    <input type="time" onchange="a(this);" style="display: none" value="07:30" />
+                </td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+                <td rowspan="2"></td>
+            </tr>
+            <tr>
+                <td>
+                    <time>02:30 </time>&nbsp;&nbsp;
+                    <input type="button" value="修改" onclick="b(this)" />
+                    <input type="time" onchange="a(this);" style="display: none" value="13:30" />
+                </td>
+            </tr>
+    </table>
+    <input type="button" value="添加员工" onclick="addS()">
+    <input type="button" value="排班" onclick="sort()">
+    <table id="staff" class="bClass">
+        <!-- <tr>
+            <td></td>
+            <td></td>
+        </tr> -->
+    </table>
+    <div style="display: none" id="single">
+        姓名：
+        <input type="text" id="name">
+        <input type="button" value="添加空余时间" onclick="addT()">
+        <table id="TT"></table>
+        <input type="button" value="确认" onclick="confirm()">
+        <input type="button" value="取消" onclick="cancel()">
+    </div>
+
+</body>
+
+</html>
