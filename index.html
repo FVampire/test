@@ -28,6 +28,7 @@
             text-align: center;
         }
     </style>
+    <!-- <script src="js.js"></script> -->
     <script>
         //修改时间
         function a(time) {
@@ -71,14 +72,31 @@
                 
             }
             document.getElementById("staff").rows[document.getElementById("staff").rows.length-document.getElementById("TT").rows.length-1].cells[0].innerHTML = document.getElementById("name").value;
-            document.getElementById("staff").rows[document.getElementById("staff").rows.length-document.getElementById("TT").rows.length-1].cells[0].setAttribute("rowspan", document.getElementById("staff").rows.length);           
+            document.getElementById("staff").rows[document.getElementById("staff").rows.length-document.getElementById("TT").rows.length-1].cells[0].setAttribute("rowspan", document.getElementById("TT").rows.length+1);           
             document.getElementById("TT").innerHTML = "";
             document.getElementById("single").style.display = "none";
+            document.getElementById("name").value="";
         }
 
         function cancel() {
             document.getElementById("TT").innerHTML = "";
             document.getElementById("single").style.display = "none";
+            document.getElementById("name").value="";
+        }
+
+        function sort(){
+            let a=[];           
+            for(let i=0;i<document.getElementById("staff").rows.length;i++){              
+                if(document.getElementById("staff").rows[i].cells[0].innerHTML.trim()!=""){
+                   a[a.length]=document.getElementById("staff").rows[i].cells[0].innerHTML.trim();
+                }
+            }
+            console.log(document.getElementsByTagName("tr")[1].cells[2]);
+            for(let i =1;i<6;i=i+2){
+                for(let j=2;j<8;j++){
+                    document.getElementsByTagName("tr")[i].cells[j].innerHTML =a[Math.floor(Math.random()*a.length)];
+                }
+            }
         }
     </script>
 </head>
